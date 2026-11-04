@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Start a game — Malaab</title>
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body class="bg-paper font-body text-ink antialiased">
+
+<!-- ============================================================
+     DESIGN REFERENCE — not the application.
+     The dark strip below and every grey annotation band are notes
+     to you. They are not interface. Delete them when you build.
+     ============================================================ -->
+<div class="bg-ink px-4 py-2 text-center text-xs text-paper/70">
+  Design reference &middot; Topic 07 — Pickup Games &middot; Create / edit form
+  <span class="opacity-60">&middot; grey annotation bands are notes, not interface</span>
+</div>
+
+<header class="border-b border-line bg-paper/95 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3.5">
+    <a href="./index.html" class="flex items-baseline gap-2.5">
+      <span class="font-display text-2xl uppercase tracking-wide text-ink">Malaab</span>
+      <span class="hidden h-2 w-2 rounded-full bg-accent-300 sm:inline-block"></span>
+      <span class="hidden text-[11px] font-semibold uppercase tracking-[0.16em] text-muted sm:inline">The game is two short</span>
+    </a>
+    <nav class="ml-4 hidden gap-1.5 md:flex"><a href="#" class="rounded-full px-3.5 py-2 text-sm font-semibold text-muted hover:bg-surface hover:text-ink">Games</a><a href="#" class="rounded-full px-3.5 py-2 text-sm font-semibold bg-brand-400 text-[#06120C]" aria-current="page">Start a game</a><a href="#" class="rounded-full px-3.5 py-2 text-sm font-semibold text-muted hover:bg-surface hover:text-ink">My games</a></nav>
+    <span class="flex-1"></span>
+    <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-brand-500/25 text-xs font-bold text-brand-200 ring-1 ring-brand-500/40">CN</span>
+  </div>
+</header>
+<main class="mx-auto max-w-5xl px-4 py-10">
+  <h1 class="font-display text-5xl uppercase leading-[0.9] tracking-[0.01em] text-ink">Start a game</h1>
+  <p class="mt-3 max-w-prose text-sm text-muted">You have the pitch. Say when, how many you need, and what it costs each.</p>
+
+
+<!-- STATE: Validation — Errors sit on the field, say what is actually wrong, and are wired with aria-invalid and aria-describedby so a screen reader announces them. -->
+<div class="mt-14 border-t border-dashed border-[#3A5546] pt-4">
+  <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+    <span class="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#9FBCAC]">State &middot; Validation</span>
+    <span class="text-xs text-[#9FBCAC]">Errors sit on the field, say what is actually wrong, and are wired with aria-invalid and aria-describedby so a screen reader announces them.</span>
+  </div>
+</div>
+
+  <form class="max-w-3xl space-y-7">
+    <div class="grid gap-x-6 gap-y-5 sm:grid-cols-2">
+      <div class="flex flex-col gap-1.5">
+        <label for="g-venue" class="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Venue</label>
+        <select id="g-venue" class="w-full rounded-lg border border-line bg-[#0E1A14] px-3.5 py-2.5 text-sm text-ink placeholder:text-muted/70 focus:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-500/25"><option selected>Dekwaneh Sports Club · 7-a-side</option><option>Jounieh Five-a-side · 5-a-side</option><option>Hoops Achrafieh · basketball</option></select>
+        <p id="g-venue-msg" class="text-xs text-muted">Capacity comes from the venue.</p>
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label for="g-sport" class="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Sport</label>
+        <select id="g-sport" class="w-full rounded-lg border border-line bg-[#0E1A14] px-3.5 py-2.5 text-sm text-ink placeholder:text-muted/70 focus:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-500/25"><option selected>Football</option><option>Basketball</option><option>Padel</option></select>
+        
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label for="g-date" class="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Date</label>
+        <input id="g-date" type="date" value="2026-10-21" placeholder="" class="w-full rounded-lg border border-line bg-[#0E1A14] px-3.5 py-2.5 text-sm text-ink placeholder:text-muted/70 focus:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-500/25 border-red-500 focus:border-red-400 focus:ring-red-500/25" aria-invalid="true" aria-describedby="g-date-msg">
+        <p id="g-date-msg" class="text-xs font-semibold text-red-300">That date has gone. Pick today or later.</p>
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label for="g-time" class="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Kick-off</label>
+        <input id="g-time" type="time" value="19:00" placeholder="" class="w-full rounded-lg border border-line bg-[#0E1A14] px-3.5 py-2.5 text-sm text-ink placeholder:text-muted/70 focus:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-500/25">
+        
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label for="g-need" class="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Players needed</label>
+        <input id="g-need" type="number" value="18" placeholder="" class="w-full rounded-lg border border-line bg-[#0E1A14] px-3.5 py-2.5 text-sm text-ink placeholder:text-muted/70 focus:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-500/25 border-red-500 focus:border-red-400 focus:ring-red-500/25" aria-invalid="true" aria-describedby="g-need-msg">
+        <p id="g-need-msg" class="text-xs font-semibold text-red-300">A 7-a-side pitch takes 14. Enter 14 or fewer.</p>
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label for="g-cost" class="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Cost a player</label>
+        <input id="g-cost" type="number" value="8" placeholder="" class="w-full rounded-lg border border-line bg-[#0E1A14] px-3.5 py-2.5 text-sm text-ink placeholder:text-muted/70 focus:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-500/25">
+        <p id="g-cost-msg" class="text-xs text-muted">The pitch fee split. Settled between you.</p>
+      </div>
+    </div>
+      <div class="flex flex-col gap-1.5">
+        <label for="g-level" class="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Level</label>
+        <div class="flex flex-wrap gap-2.5">
+          <span class="inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 bg-brand-400 text-[#06120C] hover:bg-brand-300 focus-visible:outline-brand-400 px-3.5 py-1.5 text-xs">Casual</span><span class="inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 border border-line bg-surface text-ink hover:border-brand-500 px-3.5 py-1.5 text-xs">Competitive</span>
+        </div>
+        <p id="g-level-msg" class="text-xs text-muted">Say honestly. Mismatched games are why people stop showing up.</p>
+      </div>
+      <div class="flex flex-col gap-1.5">
+        <label for="g-notes" class="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Anything else</label>
+        <textarea id="g-notes" rows="3" placeholder="Shirt colours, parking, who brings the ball" class="w-full rounded-lg border border-line bg-[#0E1A14] px-3.5 py-2.5 text-sm text-ink placeholder:text-muted/70 focus:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-500/25"></textarea>
+        <p id="g-notes-msg" class="text-xs text-muted">Optional.</p>
+      </div>
+    <div class="flex flex-wrap items-center gap-3 border-t border-line pt-6">
+      <span class="inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 bg-brand-400 text-[#06120C] hover:bg-brand-300 focus-visible:outline-brand-400">Put the game up</span><span class="inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 text-muted hover:bg-surface hover:text-ink">Cancel</span>
+      <span class="flex-1"></span><span class="text-xs font-semibold text-red-300">Two fields need attention</span>
+    </div>
+  </form>
+
+
+<!-- STATE: Leaving with unsaved changes — A real dialog, not the browser confirm. -->
+<div class="mt-14 border-t border-dashed border-[#3A5546] pt-4">
+  <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+    <span class="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#9FBCAC]">State &middot; Leaving with unsaved changes</span>
+    <span class="text-xs text-[#9FBCAC]">A real dialog, not the browser confirm.</span>
+  </div>
+</div>
+
+  <div class="flex justify-center rounded-card bg-black/60 p-10">
+    <div class="w-full max-w-md overflow-hidden rounded-card border border-line bg-surface">
+      <h2 class="border-b border-line px-6 py-4 font-display text-xl uppercase tracking-wide text-ink">Leave without posting?</h2>
+      <p class="px-6 py-6 text-sm text-muted">Nothing is saved until the game is up.</p>
+      <div class="flex justify-end gap-2 border-t border-line bg-[#0E1A14] px-6 py-4">
+        <span class="inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 border border-line bg-surface text-ink hover:border-brand-500 px-3.5 py-1.5 text-xs">Keep editing</span><span class="inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 bg-red-500 text-[#140404] hover:bg-red-400 px-3.5 py-1.5 text-xs">Discard</span>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="mx-auto mt-20 max-w-6xl border-t border-line px-4 py-8 text-xs text-muted">
+  <span class="font-display font-bold tracking-wide">MALAAB</span>
+  &middot; CSC443 Web Programming &middot; Fall 2026 &middot; design reference &middot;
+  <span class="font-mono">CSC443-F26 &middot; T07 &middot; S05 &middot; rev A</span>
+</footer>
+</body>
+</html>

@@ -1,13 +1,10 @@
 # Malaab — Topic 07, Pickup Games (React build)
 
 This project implements the Malaab design pack in **React + Vite + Tailwind CSS**,
-following the pack in `C:\Users\kevin\Desktop\topic-07-pickup-games` to the letter.
-Class names are real Tailwind classes and carry across unchanged from the static HTML.
+following the pack in `topic-07-pickup-games` to the letter.
+Update this whenever you finish your part :)
 
 ## Assignment
-
-Per `README.md` in the design pack: *"Two for each of you. Agree who takes which
-**before** you write any code, and record it in your project README."*
 
 | File | Surface | Owner |
 | --- | --- | --- |
