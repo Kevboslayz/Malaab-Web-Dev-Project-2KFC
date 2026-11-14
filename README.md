@@ -14,8 +14,8 @@ Update this whenever you finish your part :)
 | `04-venue.html` | Venue — reference data, and the games played there | ? |
 | `05-create.html` | Start a game — validation and the unsaved-changes guard | ? |
 | `06-organising.html` | Organising — your games and the queue you manage | ? |
-| `07-playing.html` | Playing — where you stand in everyone else's games | ? |
-| `08-auth.html` | Sign in and sign up — both states, plus a rejected sign-in | ? |
+| `07-playing.html` | Playing — where you stand in everyone else's games | Keven Abi Frem |
+| `08-auth.html` | Sign in and sign up — both states, plus a rejected sign-in | Keven Abi Frem |
 
 ## Where to make your parts
 
