@@ -1,4 +1,5 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { initials, useAuth } from '../context/AuthContext'
 
 export default function Layout({
   children,
@@ -11,6 +12,14 @@ export default function Layout({
     'rounded-full px-3.5 py-2 text-sm font-semibold bg-brand-400 text-[#06120C]'
   const inactiveClasses =
     'rounded-full px-3.5 py-2 text-sm font-semibold text-muted hover:bg-surface hover:text-ink'
+
+  const { currentUser, signOut } = useAuth()
+  const navigate = useNavigate()
+
+  function handleSignOut() {
+    signOut()
+    navigate('/')
+  }
 
   return (
     <>
@@ -37,14 +46,41 @@ export default function Layout({
             <a href="#" className={inactiveClasses}>
               Start a game
             </a>
-            <a href="#" className={inactiveClasses}>
+            <NavLink
+              to="/my-games"
+              className={({ isActive }) =>
+                isActive ? activeClasses : inactiveClasses
+              }
+            >
               My games
-            </a>
+            </NavLink>
           </nav>
           <span className="flex-1"></span>
-          <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-brand-500/25 text-xs font-bold text-brand-200 ring-1 ring-brand-500/40">
-            CN
-          </span>
+          {currentUser ? (
+            <>
+              <button
+                type="button"
+                onClick={handleSignOut}
+                className="rounded-full px-3 py-1.5 text-xs font-semibold text-muted hover:bg-surface hover:text-ink"
+              >
+                Sign out
+              </button>
+              <span
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-brand-500/25 text-xs font-bold text-brand-200 ring-1 ring-brand-500/40"
+                title={currentUser.name}
+                aria-label={`Signed in as ${currentUser.name}`}
+              >
+                {initials(currentUser.name)}
+              </span>
+            </>
+          ) : (
+            <NavLink
+              to="/signin"
+              className="inline-flex items-center justify-center rounded-full border border-line bg-surface px-3.5 py-1.5 text-xs font-semibold text-ink hover:border-brand-500"
+            >
+              Sign in
+            </NavLink>
+          )}
         </div>
       </header>
       <main className="mx-auto max-w-6xl px-4 py-10">{children}</main>
