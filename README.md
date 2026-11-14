@@ -50,17 +50,52 @@ malaab-t07-react
 ├── package.json                 ← react, react-dom, react-router-dom
 └── src/
     ├── main.tsx                 ← Entry: mounts React, imports ./index.css
-    ├── App.tsx                  ← Routes: "/" → Home, "/games" → Browse
+    ├── App.tsx                  ← Providers + routes
     ├── index.css                ← @import fonts + @tailwind directives
     ├── fonts.css                ← Embedded Anton + Barlow (offline)
+    ├── data/
+    │   ├── mockData.ts          ← Users, venues, games, signups (Phase 1 mock data)
+    │   └── roster.ts            ← The house rule: confirmed/queue/position/cancel + promote
+    ├── context/
+    │   ├── AuthContext.tsx      ← Who is signed in: signIn, signUp, signOut, useAuth()
+    │   └── GamesContext.tsx     ← Shared games + signups state, useGames()
     ├── components/
-    │   ├── Layout.tsx           ← Header/nav/footer wrapper
+    │   ├── Layout.tsx           ← Header/nav/footer wrapper (auth-aware)
     │   ├── GameCard.tsx         ← Shared game card (badge + action)
-    │   └── FilterBar.tsx        ← Browse filter bar
+    │   ├── FilterBar.tsx        ← Browse filter bar
+    │   ├── Field.tsx            ← Labelled input with hint/error + aria wiring
+    │   ├── ConfirmDialog.tsx    ← Confirm before anything destructive
+    │   └── ui.ts                ← Shared Tailwind class strings (buttons, badges, inputs)
     └── pages/
         ├── Home.tsx             ← Surface 01 (Kevin)
-        └── Browse.tsx           ← Surface 02 (Kevin)
+        ├── Browse.tsx           ← Surface 02 (Kevin)
+        ├── Playing.tsx          ← Surface 07 — /my-games/playing
+        └── Auth.tsx             ← Surface 08 — /signin and /signup
 ```
+
+## Routes so far
+
+| Route | Surface |
+| --- | --- |
+| `/` | 01 Home |
+| `/games` | 02 Browse |
+| `/signin`, `/signup` | 08 Sign in & sign up (`?next=/some/path` returns you there after) |
+| `/my-games` | redirects to `/my-games/playing` |
+| `/my-games/playing` | 07 Playing |
+
+## Mock data and accounts
+
+Everything lives in `src/data/mockData.ts` and is held in React state by
+`AuthContext` and `GamesContext`, so it resets on reload (no localStorage, as the
+brief asks). Every seeded user signs in with password `malaab2026`, e.g.
+`christian.nehman@lau.edu`.
+
+Spots left and queue positions are never stored — they are computed in
+`src/data/roster.ts` from the signups. Use `useGames()` and the roster helpers
+on your surfaces so every page agrees on the house rule.
+
+To see the four data states on Playing, add `?state=loading`, `?state=empty` or
+`?state=error` to the URL.
 
 ## Run it
 
