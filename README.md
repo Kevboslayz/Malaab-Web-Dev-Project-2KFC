@@ -11,7 +11,7 @@
 
 | Full name | Student ID | Role |
 | --- | --- | --- |
-| Christian Nehman | **[TO BE FILLED IN]** | Surfaces 05–06 (create / organising) |
+| Christian Nehman | 202403544 | Surfaces 05–06 (create / organising) |
 | Kevin Assi | 202302666 | Surfaces 01–02 (home / browse) |
 | Keven Abi Frem | **[TO BE FILLED IN]** | Surfaces 07–08 (playing / auth) |
 | Francois Seif | **[TO BE FILLED IN]** | Surfaces 03–04 (game detail / venue) |
