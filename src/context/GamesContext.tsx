@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from 'react'
 import type { ReactNode } from 'react'
 import { seedGames, seedSignups, venues } from '../data/mockData'
 import type { Game, Signup, Venue } from '../data/mockData'
-import { cancelSignup as applyCancel } from '../data/roster'
+import { cancelSignup as applyCancel, signupFor, spotsLeft } from '../data/roster'
 
 // Games and signups shared by every surface. Held in React state, so a
 // drop-out on one page is seen on the game page and the dashboards too.
@@ -14,6 +14,9 @@ type GamesValue = {
   createGame: (game: Omit<Game, 'id' | 'organiserId' | 'status'>, organiserId: string) => Game
   updateGame: (game: Game) => void
   cancelGame: (gameId: string) => void
+  // A join is confirmed while a spot remains, waitlisted once full. The
+  // status is derived at join time from the current roster, never assumed.
+  joinGame: (gameId: string, playerId: string) => Signup | null
   // Returns the signup that was promoted from the queue, if any.
   cancelSignup: (signupId: string) => Signup | null
 }
@@ -58,6 +61,24 @@ export function GamesProvider({ children }: { children: ReactNode }) {
     )
   }
 
+  function joinGame(gameId: string, playerId: string): Signup | null {
+    const game = games.find((item) => item.id === gameId)
+    if (!game || game.status !== 'open') return null
+
+    const existing = signupFor(gameId, playerId, signups)
+    if (existing) return existing
+
+    const signup: Signup = {
+      id: `${gameId}-${playerId}-${Date.now()}`,
+      gameId,
+      playerId,
+      status: spotsLeft(game, signups) > 0 ? 'confirmed' : 'waitlisted',
+      signedUpAt: new Date(),
+    }
+    setSignups((previous) => [...previous, signup])
+    return signup
+  }
+
   function cancelSignup(signupId: string) {
     const result = applyCancel(signups, signupId)
     setSignups(result.signups)
@@ -66,7 +87,7 @@ export function GamesProvider({ children }: { children: ReactNode }) {
 
   return (
     <GamesContext.Provider
-      value={{ games, venues, signups, createGame, updateGame, cancelGame, cancelSignup }}
+      value={{ games, venues, signups, createGame, updateGame, cancelGame, joinGame, cancelSignup }}
     >
       {children}
     </GamesContext.Provider>

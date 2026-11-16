@@ -160,7 +160,7 @@ function SignInForm({ next, switchTo }: { next: string; switchTo: string }) {
           </Link>
         </p>
         <p className="text-center text-[11px] text-muted/70">
-          Demo account: christian.nehman@lau.edu &middot; {DEMO_PASSWORD}
+          Demo account: christian.nehman@lau.edu · {DEMO_PASSWORD}
         </p>
       </form>
     </>

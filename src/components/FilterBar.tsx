@@ -1,59 +1,90 @@
-const input =
-  'w-full rounded-lg border border-line bg-[#0E1A14] px-3.5 py-2.5 text-sm text-ink placeholder:text-muted/70 focus:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-500/25'
+import { fieldLabel, ghostButton, inputValid, sizeSmall } from './ui'
 
-const label = 'text-[11px] font-semibold uppercase tracking-[0.16em] text-muted'
+// Controlled filter bar: the page owns the values and does the filtering, so
+// the count beside "Clear" is the real number of results.
+type FilterBarProps = {
+  query: string
+  sport: string
+  when: string
+  level: string
+  onQuery: (value: string) => void
+  onSport: (value: string) => void
+  onWhen: (value: string) => void
+  onLevel: (value: string) => void
+  onClear: () => void
+  count: number
+}
 
-const clearButton =
-  'inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 text-muted hover:bg-surface hover:text-ink px-3.5 py-1.5 text-xs'
+const selectClass = `${inputValid} w-full sm:w-36`
 
-export default function FilterBar() {
+export default function FilterBar({
+  query,
+  sport,
+  when,
+  level,
+  onQuery,
+  onSport,
+  onWhen,
+  onLevel,
+  onClear,
+  count,
+}: FilterBarProps) {
   return (
-    <form className="flex flex-wrap items-end gap-3 rounded-card border border-line bg-surface p-4">
+    <form
+      className="flex flex-wrap items-end gap-3 rounded-card border border-line bg-surface p-4"
+      onSubmit={(event) => event.preventDefault()}
+    >
       <div className="flex min-w-[10rem] flex-1 flex-col gap-1.5">
-        <label htmlFor="q" className={label}>
+        <label htmlFor="q" className={fieldLabel}>
           Venue or area
         </label>
         <input
           id="q"
           type="search"
-          className={input}
+          className={inputValid}
           placeholder="Dekwaneh, Achrafieh"
+          value={query}
+          onChange={(event) => onQuery(event.target.value)}
         />
       </div>
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="sp" className={label}>
+        <label htmlFor="sp" className={fieldLabel}>
           Sport
         </label>
-        <select id="sp" className={`${input} w-36`}>
-          <option>Any</option>
-          <option selected>Football</option>
-          <option>Basketball</option>
-          <option>Padel</option>
+        <select id="sp" className={selectClass} value={sport} onChange={(event) => onSport(event.target.value)}>
+          <option value="Any">Any</option>
+          <option value="Football">Football</option>
+          <option value="Basketball">Basketball</option>
+          <option value="Padel">Padel</option>
         </select>
       </div>
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="dt" className={label}>
+        <label htmlFor="dt" className={fieldLabel}>
           When
         </label>
-        <select id="dt" className={`${input} w-36`}>
-          <option selected>Next 7 days</option>
-          <option>Tonight</option>
-          <option>Weekend</option>
+        <select id="dt" className={selectClass} value={when} onChange={(event) => onWhen(event.target.value)}>
+          <option value="Next 7 days">Next 7 days</option>
+          <option value="Tonight">Tonight</option>
+          <option value="Weekend">Weekend</option>
         </select>
       </div>
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="lv" className={label}>
+        <label htmlFor="lv" className={fieldLabel}>
           Level
         </label>
-        <select id="lv" className={`${input} w-36`}>
-          <option>Any</option>
-          <option>Casual</option>
-          <option>Competitive</option>
+        <select id="lv" className={selectClass} value={level} onChange={(event) => onLevel(event.target.value)}>
+          <option value="Any">Any</option>
+          <option value="Casual">Casual</option>
+          <option value="Competitive">Competitive</option>
         </select>
       </div>
-      <span className={clearButton}>Clear</span>
+      <button type="button" onClick={onClear} className={`${ghostButton} ${sizeSmall}`}>
+        Clear
+      </button>
       <span className="flex-1"></span>
-      <span className="font-mono text-xs text-muted">5 games</span>
+      <span className="font-mono text-xs text-muted" role="status">
+        {count} {count === 1 ? 'game' : 'games'}
+      </span>
     </form>
   )
 }

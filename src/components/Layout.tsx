@@ -82,6 +82,17 @@ export default function Layout({
             </NavLink>
           )}
         </div>
+        <nav className="flex gap-1.5 border-t border-line px-4 py-2 md:hidden" aria-label="Main navigation">
+          <NavLink to="/games" className={({ isActive }) => (isActive ? activeClasses : inactiveClasses)}>
+            Games
+          </NavLink>
+          <Link to="/create" className={inactiveClasses}>
+            Start a game
+          </Link>
+          <NavLink to="/my-games" className={({ isActive }) => (isActive ? activeClasses : inactiveClasses)}>
+            My games
+          </NavLink>
+        </nav>
       </header>
       <main className="mx-auto max-w-6xl px-4 py-10">{children}</main>
       <footer className="mx-auto mt-20 max-w-6xl border-t border-line px-4 py-8 text-xs text-muted">
@@ -89,7 +100,7 @@ export default function Layout({
         &middot; CSC443 Web Programming &middot; Fall 2026 &middot; design reference
         &middot;
         <span className="font-mono">
-          {footerCode ?? 'CSC443-F26 &middot; T07 &middot; rev A'}
+          {footerCode ?? 'CSC443-F26 · T07 · rev A'}
         </span>
       </footer>
     </>

@@ -19,6 +19,14 @@ export function spotsLeft(game: Game, signups: Signup[]): number {
   return game.playersNeeded - confirmedFor(game.id, signups).length
 }
 
+// A player's active signup for a game, if they have one. Cancelled signups
+// do not count — leaving and joining again puts you at the back of the line.
+export function signupFor(gameId: string, playerId: string, signups: Signup[]): Signup | undefined {
+  return signups.find(
+    (s) => s.gameId === gameId && s.playerId === playerId && s.status !== 'cancelled',
+  )
+}
+
 // 1-based place in the queue, or null if this player is not waiting.
 export function queuePosition(gameId: string, playerId: string, signups: Signup[]): number | null {
   const index = queueFor(gameId, signups).findIndex((s) => s.playerId === playerId)

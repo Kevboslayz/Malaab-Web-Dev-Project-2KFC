@@ -17,8 +17,11 @@ export const dangerButton = buttonBase + ' bg-red-500 text-[#140404] hover:bg-re
 const badgeBase =
   'inline-flex items-center rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wide ring-1 ring-inset'
 
+export const badgeOpen = badgeBase + ' bg-brand-500/15 text-brand-300 ring-brand-500/40'
+export const badgeOneSpot = badgeBase + ' bg-accent-400/15 text-accent-300 ring-accent-400/40'
 export const badgeYouAreIn = badgeBase + ' bg-brand-400 text-[#06120C] ring-brand-400'
 export const badgeQueue = badgeBase + ' bg-accent-300/15 text-accent-200 ring-accent-300/40'
+export const badgeOrganising = badgeBase + ' bg-brand-500/20 text-brand-200 ring-brand-500/50'
 export const badgeMuted = badgeBase + ' bg-ink/10 text-muted ring-line'
 export const badgeCancelled = badgeBase + ' bg-red-500/15 text-red-300 ring-red-500/40'
 

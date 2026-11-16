@@ -21,6 +21,11 @@ export type Venue = {
   surface: string
   floodlights: boolean
   pricePerHour: number
+  // Reference detail shown on the venue surface. Nobody edits these in the app.
+  format: string
+  amenities: string[]
+  hours: string
+  pitches: number
 }
 
 // "full" is not stored: it is computed from the confirmed signups.
@@ -78,11 +83,11 @@ export const seedUsers: User[] = [
 ]
 
 export const venues: Venue[] = [
-  { id: 'v1', name: 'Dekwaneh Sports Club', area: 'Dekwaneh', sport: 'Football', maxPlayers: 14, surface: 'Artificial grass', floodlights: true, pricePerHour: 60 },
-  { id: 'v2', name: 'Hoops Achrafieh', area: 'Achrafieh', sport: 'Basketball', maxPlayers: 10, surface: 'Indoor hardwood', floodlights: true, pricePerHour: 50 },
-  { id: 'v3', name: 'Jounieh Five-a-side', area: 'Jounieh', sport: 'Football', maxPlayers: 10, surface: 'Artificial grass', floodlights: true, pricePerHour: 70 },
-  { id: 'v4', name: 'Padel Point Zalka', area: 'Zalka', sport: 'Padel', maxPlayers: 4, surface: 'Glass court', floodlights: true, pricePerHour: 40 },
-  { id: 'v5', name: 'Bourj Hammoud Pitch', area: 'Bourj Hammoud', sport: 'Football', maxPlayers: 14, surface: 'Artificial grass', floodlights: true, pricePerHour: 55 },
+  { id: 'v1', name: 'Dekwaneh Sports Club', area: 'Dekwaneh', sport: 'Football', maxPlayers: 14, surface: 'Artificial grass', floodlights: true, pricePerHour: 60, format: '7v7', amenities: ['Floodlit', 'Changing rooms', 'Parking'], hours: '08:00 to 00:00', pitches: 3 },
+  { id: 'v2', name: 'Hoops Achrafieh', area: 'Achrafieh', sport: 'Basketball', maxPlayers: 10, surface: 'Indoor hardwood', floodlights: true, pricePerHour: 50, format: '5v5', amenities: ['Floodlit', 'Changing rooms', 'Parking'], hours: '09:00 to 23:00', pitches: 2 },
+  { id: 'v3', name: 'Jounieh Five-a-side', area: 'Jounieh', sport: 'Football', maxPlayers: 10, surface: 'Artificial grass', floodlights: true, pricePerHour: 70, format: '5v5', amenities: ['Floodlit', 'Parking'], hours: '08:00 to 00:00', pitches: 2 },
+  { id: 'v4', name: 'Padel Point Zalka', area: 'Zalka', sport: 'Padel', maxPlayers: 4, surface: 'Glass court', floodlights: true, pricePerHour: 40, format: 'Doubles', amenities: ['Floodlit', 'Racket hire', 'Changing rooms'], hours: '10:00 to 23:00', pitches: 4 },
+  { id: 'v5', name: 'Bourj Hammoud Pitch', area: 'Bourj Hammoud', sport: 'Football', maxPlayers: 14, surface: 'Artificial grass', floodlights: true, pricePerHour: 55, format: '7v7', amenities: ['Floodlit', 'Parking'], hours: '08:00 to 22:00', pitches: 1 },
 ]
 
 // Dates are relative to today so "Tonight" and "Tomorrow" stay true.
