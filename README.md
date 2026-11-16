@@ -5,25 +5,16 @@
 **Topic:** 07 — Pickup Games
 **Brief reference code:** `CSC443-F26 · T07 · rev A` (from the footer of `topic-07-pickup-games/index.html`; the eight surface pages use `CSC443-F26 · T07 · S01…S08 · rev A`, and the roster reference is `… · C01 · rev A`)
 
-**Team name:** **[TO BE FILLED IN BY THE TEAM]**
+**Team name:** 2KFC
 
 ## Team
 
 | Full name | Student ID | Role |
 | --- | --- | --- |
 | Christian Nehman | **[TO BE FILLED IN]** | Surfaces 05–06 (create / organising) |
-| Kevin Assi | **[TO BE FILLED IN]** | Surfaces 01–02 (home / browse) |
+| Kevin Assi | 202302666 | Surfaces 01–02 (home / browse) |
 | Keven Abi Frem | **[TO BE FILLED IN]** | Surfaces 07–08 (playing / auth) |
 | Francois Seif | **[TO BE FILLED IN]** | Surfaces 03–04 (game detail / venue) |
-
-> The two columns above that are marked **[TO BE FILLED IN]** are the only
-> facts in this document not yet supplied by the team. Do not guess them.
-
-## Live link
-
-**Not deployed yet.** This README will be updated with the live URL once the
-build is deployed. The project runs locally with the instructions below, and all
-screenshots in this document were captured from the real running application.
 
 ## What the project is
 
@@ -44,6 +35,7 @@ surface. Fields marked *computed* are never stored; they are derived from the
 signup list in `src/data/roster.ts`.
 
 ### `User`
+
 | Field | Type | Meaning |
 | --- | --- | --- |
 | `id` | `string` | Stable identifier (`u1`…`u18`, `u<timestamp>` for new accounts) |
@@ -54,6 +46,7 @@ signup list in `src/data/roster.ts`.
 | `password` | `string` | Plain text for the Phase 1 mock sign-in only (no server, no hash) |
 
 ### `Venue` (reference data — nobody creates, edits or deletes a venue in the app)
+
 | Field | Type | Meaning |
 | --- | --- | --- |
 | `id` | `string` | `v1`…`v5` |
@@ -70,6 +63,7 @@ signup list in `src/data/roster.ts`.
 | `pitches` | `number` | Number of pitches/courts |
 
 ### `Game`
+
 | Field | Type | Meaning |
 | --- | --- | --- |
 | `id` | `string` | `g1`…`g7` or `g<timestamp>` for newly created games |
@@ -87,6 +81,7 @@ signup list in `src/data/roster.ts`.
 | *full* | *computed* | Never stored; derived from spots left |
 
 ### `Signup`
+
 | Field | Type | Meaning |
 | --- | --- | --- |
 | `id` | `string` | Signup identifier |
@@ -177,7 +172,7 @@ npm install
 npm run dev
 ```
 
-Open **http://localhost:5173/** in a browser. Press `Ctrl+C` in the terminal to
+Open **<http://localhost:5173/>** in a browser. Press `Ctrl+C` in the terminal to
 stop the server.
 
 Optional commands:
