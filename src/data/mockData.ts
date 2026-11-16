@@ -55,6 +55,8 @@ export type Signup = {
 }
 
 export const DEMO_PASSWORD = 'malaab2026'
+// A dummy account used only in the sign-in hint — not a real person's address.
+export const DEMO_EMAIL = 'demo.player@lau.edu'
 
 function person(id: string, name: string, sports: string[], phone: string): User {
   const email = name.toLowerCase().replace(/\s+/g, '.') + '@lau.edu'
@@ -80,6 +82,7 @@ export const seedUsers: User[] = [
   person('u16', 'Rami Haddad', ['Football', 'Padel'], '+961 03 126 859'),
   person('u17', 'Joe Saliba', ['Basketball'], '+961 76 708 213'),
   person('u18', 'Tony Karam', ['Football', 'Padel'], '+961 81 359 670'),
+  person('u19', 'Demo Player', ['Football', 'Basketball'], '+961 70 000 000'),
 ]
 
 export const venues: Venue[] = [

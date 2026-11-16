@@ -5,7 +5,7 @@ import Layout from '../components/Layout'
 import Field from '../components/Field'
 import { primaryButton, sizeNormal } from '../components/ui'
 import { useAuth } from '../context/AuthContext'
-import { DEMO_PASSWORD } from '../data/mockData'
+import { DEMO_EMAIL, DEMO_PASSWORD } from '../data/mockData'
 
 // Surface 08 — Sign in and sign up. One page component, two modes, so the
 // frame (left-hand pitch + card) is written once.
@@ -128,7 +128,7 @@ function SignInForm({ next, switchTo }: { next: string; switchTo: string }) {
           label="University email"
           type="email"
           autoComplete="email"
-          placeholder="christian.nehman@lau.edu"
+          placeholder={DEMO_EMAIL}
           value={email}
           onChange={(v) => {
             setEmail(v)
@@ -160,7 +160,7 @@ function SignInForm({ next, switchTo }: { next: string; switchTo: string }) {
           </Link>
         </p>
         <p className="text-center text-[11px] text-muted/70">
-          Demo account: christian.nehman@lau.edu · {DEMO_PASSWORD}
+          Demo account: {DEMO_EMAIL} · {DEMO_PASSWORD}
         </p>
       </form>
     </>
@@ -244,7 +244,7 @@ function SignUpForm({ next, switchTo }: { next: string; switchTo: string }) {
           label="University email"
           type="email"
           autoComplete="email"
-          placeholder="christian.nehman@lau.edu"
+          placeholder={DEMO_EMAIL}
           value={values.email}
           onChange={set('email')}
           onBlur={blur('email')}

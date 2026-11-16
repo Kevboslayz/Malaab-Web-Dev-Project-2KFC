@@ -104,7 +104,7 @@ malaab-t07-react
 Everything lives in `src/data/mockData.ts` and is held in React state by
 `AuthContext` and `GamesContext`, so it resets on reload (no localStorage, as the
 brief asks). Every seeded user signs in with password `malaab2026`, e.g.
-`christian.nehman@lau.edu`.
+`demo.player@lau.edu`.
 
 Spots left and queue positions are never stored — they are computed in
 `src/data/roster.ts` from the signups, and `Roster.tsx` is the only component
@@ -121,7 +121,7 @@ The four data states and the viewer variants are reachable without editing code:
   `/my-games/playing` (Playing). `?state=loading` / `?state=error` also work on
   `/games/:id`.
 - Sign out to see the **signed-out** variant of a game; sign in as the organiser
-  (`christian.nehman@lau.edu` on game `g5`) for the **owner** variant, or as any
+  (the organiser of game `g5`) for the **owner** variant, or as any
   other user for the **another signed-in player** variant.
 - Games `g1`, `g2` and `g5` have queues, so the ordered waitlist and automatic
   promotion can be tried straight away.
