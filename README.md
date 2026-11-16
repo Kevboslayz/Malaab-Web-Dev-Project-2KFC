@@ -123,8 +123,9 @@ The four data states and the viewer variants are reachable without editing code:
 - Sign out to see the **signed-out** variant of a game; sign in as the organiser
   (the organiser of game `g5`) for the **owner** variant, or as any
   other user for the **another signed-in player** variant.
-- Games `g1`, `g2` and `g5` have queues, so the ordered waitlist and automatic
-  promotion can be tried straight away.
+- Games `g1` and `g2` have queues, so the ordered waitlist and automatic
+  promotion can be tried straight away. (Game `g5` has open spots, so joining it
+  takes you straight into the roster.)
 
 The app is dark on every surface, uses no network requests, and works down to
 390px (there is a mobile nav in the header).

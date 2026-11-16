@@ -13,7 +13,7 @@ const emptyFilters = { query: '', sport: 'Any', when: 'Next 7 days', level: 'Any
 
 function skeletonCard() {
   return (
-    <li className="rounded-card border border-line bg-surface p-5">
+    <div className="rounded-card border border-line bg-surface p-5">
       <div className="flex items-start justify-between gap-3">
         <div className="w-full space-y-2.5">
           <span className="block h-3 w-24 animate-pulse rounded bg-line"></span>
@@ -26,7 +26,7 @@ function skeletonCard() {
         <span className="h-6 w-14 animate-pulse rounded bg-line"></span>
         <span className="h-8 w-24 animate-pulse rounded-full bg-line"></span>
       </div>
-    </li>
+    </div>
   )
 }
 

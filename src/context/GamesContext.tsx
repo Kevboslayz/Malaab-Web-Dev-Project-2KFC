@@ -68,12 +68,18 @@ export function GamesProvider({ children }: { children: ReactNode }) {
     const existing = signupFor(gameId, playerId, signups)
     if (existing) return existing
 
+    // A join always goes to the back of the line. Seeded timestamps are
+    // relative to kickoff, so "now" can be earlier than somebody already
+    // waiting — never let a new arrival jump the queue.
+    const latest = signups
+      .filter((s) => s.gameId === gameId)
+      .reduce((max, s) => Math.max(max, s.signedUpAt.getTime()), 0)
     const signup: Signup = {
       id: `${gameId}-${playerId}-${Date.now()}`,
       gameId,
       playerId,
       status: spotsLeft(game, signups) > 0 ? 'confirmed' : 'waitlisted',
-      signedUpAt: new Date(),
+      signedUpAt: new Date(Math.max(Date.now(), latest + 1)),
     }
     setSignups((previous) => [...previous, signup])
     return signup
