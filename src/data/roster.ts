@@ -47,3 +47,27 @@ export function cancelSignup(
   }
   return { signups: next, promoted }
 }
+
+// Signs a player up for a game. Confirmed if a spot is open, otherwise
+// waitlisted at the back of the queue by arrival time.
+export function addSignup(
+  game: Game,
+  playerId: string,
+  signups: Signup[],
+): { signups: Signup[]; signup: Signup | null } {
+  if (game.status !== 'open') return { signups, signup: null }
+  const existing = signups.find(
+    (s) => s.gameId === game.id && s.playerId === playerId && s.status !== 'cancelled',
+  )
+  if (existing) return { signups, signup: existing }
+
+  const status = spotsLeft(game, signups) > 0 ? 'confirmed' : 'waitlisted'
+  const signup: Signup = {
+    id: `${game.id}-s${Date.now()}`,
+    gameId: game.id,
+    playerId,
+    status,
+    signedUpAt: new Date(),
+  }
+  return { signups: [...signups, signup], signup }
+}

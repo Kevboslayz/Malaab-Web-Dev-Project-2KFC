@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom'
+
 type Game = {
-  id: number
+  id: number | string
   sport: string
   level: string
   title: string
@@ -62,9 +64,9 @@ export default function GameCard({ game }: { game: Game }) {
             {game.sport} &middot; {game.level}
           </p>
           <h3 className="mt-1.5 font-display text-2xl uppercase leading-none tracking-wide text-ink">
-            <a href="#" className="after:absolute after:inset-0">
+            <Link to={`/games/${game.id}`} className="after:absolute after:inset-0">
               {game.title}
-            </a>
+            </Link>
           </h3>
           <p className="mt-2 text-sm text-muted">
             {game.location} &middot; {game.time} &middot;{' '}
