@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { initials, useAuth } from '../context/AuthContext'
 
 export default function Layout({
@@ -17,8 +17,8 @@ export default function Layout({
   const navigate = useNavigate()
 
   function handleSignOut() {
-    signOut()
     navigate('/')
+    signOut()
   }
 
   return (
@@ -43,9 +43,9 @@ export default function Layout({
             >
               Games
             </NavLink>
-            <a href="#" className={inactiveClasses}>
+            <Link to="/create" className={inactiveClasses}>
               Start a game
-            </a>
+            </Link>
             <NavLink
               to="/my-games"
               className={({ isActive }) =>

@@ -69,6 +69,8 @@ malaab-t07-react
     └── pages/
         ├── Home.tsx             ← Surface 01 (Kevin)
         ├── Browse.tsx           ← Surface 02 (Kevin)
+        ├── CreateGame.tsx       ← Surface 05 — /create
+        ├── Organising.tsx       ← Surface 06 — /my-games/organising
         ├── Playing.tsx          ← Surface 07 — /my-games/playing
         └── Auth.tsx             ← Surface 08 — /signin and /signup
 ```
@@ -79,8 +81,10 @@ malaab-t07-react
 | --- | --- |
 | `/` | 01 Home |
 | `/games` | 02 Browse |
+| `/create` | 05 Start or edit a game |
 | `/signin`, `/signup` | 08 Sign in & sign up (`?next=/some/path` returns you there after) |
 | `/my-games` | redirects to `/my-games/playing` |
+| `/my-games/organising` | 06 Organising |
 | `/my-games/playing` | 07 Playing |
 
 ## Mock data and accounts

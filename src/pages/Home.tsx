@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Layout from '../components/Layout'
 import GameCard from '../components/GameCard'
 
@@ -73,16 +74,18 @@ export default function Home() {
           one of them bails at six o'clock.
         </p>
         <div className="relative mt-9 flex flex-wrap gap-3">
-          <button
+          <Link
+            to="/games"
             className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 bg-brand-400 text-[#06120C] hover:bg-brand-300 focus-visible:outline-brand-400"
           >
             Find a game
-          </button>
-          <button
+          </Link>
+          <Link
+            to="/create"
             className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 border border-line bg-surface text-ink hover:border-brand-500"
           >
             Start one
-          </button>
+          </Link>
         </div>
       </section>
 
@@ -91,12 +94,12 @@ export default function Home() {
           <h2 className="font-display text-3xl uppercase leading-[0.95] tracking-[0.01em] text-ink">
             Tonight
           </h2>
-          <a
-            href="/games"
+          <Link
+            to="/games"
             className="text-sm font-semibold text-brand-300 underline decoration-accent-300 decoration-2 underline-offset-4"
           >
             Every game
-          </a>
+          </Link>
         </div>
         <ul className="mt-6 grid gap-5 lg:grid-cols-2">
           {games.map((game) => (

@@ -17,6 +17,7 @@ export type Venue = {
   name: string
   area: string
   sport: 'Football' | 'Basketball' | 'Padel'
+  maxPlayers: number
   surface: string
   floodlights: boolean
   pricePerHour: number
@@ -77,11 +78,11 @@ export const seedUsers: User[] = [
 ]
 
 export const venues: Venue[] = [
-  { id: 'v1', name: 'Dekwaneh Sports Club', area: 'Dekwaneh', sport: 'Football', surface: 'Artificial grass', floodlights: true, pricePerHour: 60 },
-  { id: 'v2', name: 'Hoops Achrafieh', area: 'Achrafieh', sport: 'Basketball', surface: 'Indoor hardwood', floodlights: true, pricePerHour: 50 },
-  { id: 'v3', name: 'Jounieh Five-a-side', area: 'Jounieh', sport: 'Football', surface: 'Artificial grass', floodlights: true, pricePerHour: 70 },
-  { id: 'v4', name: 'Padel Point Zalka', area: 'Zalka', sport: 'Padel', surface: 'Glass court', floodlights: true, pricePerHour: 40 },
-  { id: 'v5', name: 'Bourj Hammoud Pitch', area: 'Bourj Hammoud', sport: 'Football', surface: 'Artificial grass', floodlights: true, pricePerHour: 55 },
+  { id: 'v1', name: 'Dekwaneh Sports Club', area: 'Dekwaneh', sport: 'Football', maxPlayers: 14, surface: 'Artificial grass', floodlights: true, pricePerHour: 60 },
+  { id: 'v2', name: 'Hoops Achrafieh', area: 'Achrafieh', sport: 'Basketball', maxPlayers: 10, surface: 'Indoor hardwood', floodlights: true, pricePerHour: 50 },
+  { id: 'v3', name: 'Jounieh Five-a-side', area: 'Jounieh', sport: 'Football', maxPlayers: 10, surface: 'Artificial grass', floodlights: true, pricePerHour: 70 },
+  { id: 'v4', name: 'Padel Point Zalka', area: 'Zalka', sport: 'Padel', maxPlayers: 4, surface: 'Glass court', floodlights: true, pricePerHour: 40 },
+  { id: 'v5', name: 'Bourj Hammoud Pitch', area: 'Bourj Hammoud', sport: 'Football', maxPlayers: 14, surface: 'Artificial grass', floodlights: true, pricePerHour: 55 },
 ]
 
 // Dates are relative to today so "Tonight" and "Tomorrow" stay true.

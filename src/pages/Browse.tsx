@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Layout from '../components/Layout'
 import FilterBar from '../components/FilterBar'
 import GameCard from '../components/GameCard'
@@ -167,7 +168,7 @@ export default function Browse({
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <button className={surfaceButton}>Search anywhere</button>
-              <button className={brandButton}>Start a game</button>
+              <Link to="/create" className={brandButton}>Start a game</Link>
             </div>
           </div>
         )}
