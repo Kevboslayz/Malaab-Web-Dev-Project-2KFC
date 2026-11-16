@@ -18,9 +18,10 @@ wired together.
 | `08-auth.html` | Sign in and sign up — both states, plus a rejected sign-in | Keven Abi Frem ✅ |
 
 The agreement is recorded here, member by member: Kevin took surfaces 01–02,
-Francois took 03–04, Christian took 05–06, and Keven took 07–08. Surfaces 03–04
-were completed in the final integration pass along with the shared roster,
-routing and data wiring.
+Francois took 03–04, Christian took 05–06, and Keven took 07–08. Francois's
+`feat/francois-part` branch is merged into `main`: it supplies the game detail
+and venue pages and the organiser's roster controls, adapted here to the shared
+data context, routing and `GameCard`.
 
 ## Where the design pack lives
 
@@ -143,6 +144,7 @@ Open `http://localhost:5173/`.
 
 ## Branches
 
-`main` is the integrated, working build. The `feat/03-game` and
-`feature/playing-auth` branches are kept in sync with `main` so every branch has
-the same fix; no work is lost on them.
+`main` is the integrated, working build. `feat/francois-part` contributed
+surfaces 03–04 and was merged into `main` (its owner's work is preserved in the
+merge). `feat/03-game` and `feature/playing-auth` are kept in sync with `main`,
+so every branch has the same working app.
