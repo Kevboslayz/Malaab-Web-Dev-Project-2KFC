@@ -22,7 +22,8 @@ Malaab is a Phase 1 web app for organising pickup games: a player sees which
 games need people, joins one, and can see exactly where they stand. The
 organiser manages the roster and the queue. The design specification is the
 `topic-07-pickup-games/` folder in this repository; it was read as a
-specification, not copied into the app.
+specification, not copied into the app. That folder is explicitly excluded from
+deployment by `.vercelignore`, so only our own application is published.
 
 The app is dark on every surface, works down to 390px (including a mobile nav),
 makes no network requests, and resets its mock data on reload — all as required
@@ -188,6 +189,73 @@ of them gives you the same application.
 
 **Demo sign-in:** `demo.player@lau.edu` / `malaab2026` (a dummy account).
 Every seeded user uses the password `malaab2026`.
+
+## Deploying to Vercel (Hobby / free)
+
+The app is a static Vite SPA: there is no backend, database or paid service in
+Phase 1, so the **Vercel Hobby (free) plan is sufficient**.
+
+Everything needed for deployment is already committed:
+
+| File | Purpose |
+| --- | --- |
+| `vercel.json` | Framework preset `vite`, `npm run build`, output `dist`, and a SPA rewrite to `/index.html` so deep links such as `/games/g5` and `/my-games/playing` work after a refresh. The rewrite deliberately excludes `/api/` (reserved for Phase 2) and static asset paths. |
+| `.vercelignore` | Keeps `topic-07-pickup-games/` (the supplied specification), `docs/`, Markdown files and local scripts out of the upload — **only our work is deployed**. `node_modules` and `dist` are excluded too; Vercel installs and builds fresh. |
+| `package.json` | `build` script is `tsc && vite build`; `engines.node` pins a Vite-8-compatible Node runtime. |
+| `.env.example` | Documents environment variables. **Phase 1 needs none.** |
+
+### Deploy from the Vercel dashboard (recommended)
+
+1. Make sure `main` on GitHub contains this README and the files above
+   (all four branches are kept in sync).
+2. Sign in at <https://vercel.com/> with GitHub and choose **Add New → Project**.
+3. Import the repository:
+   `https://github.com/Kevboslayz/Malaab-Web-Dev-Project-2KFC.git`.
+4. Accept the detected settings (they are also in `vercel.json`):
+   - **Framework Preset:** Vite
+   - **Root Directory:** `./` (leave as default)
+   - **Install Command:** `npm install`
+   - **Build Command:** `npm run build`
+   - **Output Directory:** `dist`
+5. **Environment Variables:** none for Phase 1 — leave empty and deploy.
+6. Click **Deploy**. Vercel also creates automatic preview deployments for
+   every branch and pull request.
+
+Optional CLI route (requires a Vercel account/login):
+
+```powershell
+npm install -g vercel
+vercel login
+cd Malaab-Web-Dev-Project-2KFC
+vercel --prod
+```
+
+### Check the deployment after it finishes
+
+- Open the root URL: the Home page should render with the dark theme.
+- Open and then **refresh** a deep link such as `/games/g5` and `/venues/v1` —
+  they must still load. That confirms the `vercel.json` SPA rewrite works.
+- `/favicon.svg` should return an SVG (it comes from `public/`).
+- Confirm the build log used `npm run build` and produced `dist/`.
+
+### Ready for Phase 2
+
+- **API routes:** add serverless functions under `api/` (for example
+  `api/games.ts`). The SPA rewrite excludes `/api/`, so they will be reachable
+  without changing `vercel.json`.
+- **Secrets:** put database URLs and API keys in Vercel **Project Settings →
+  Environment Variables** and read them only inside `/api` functions. Never put
+  a secret in a `VITE_` variable — Vite embeds those in client-side code.
+- **Client config:** if the frontend needs an API address, add `VITE_API_BASE_URL`
+  in the Vercel dashboard (see `.env.example`) and use `import.meta.env` in the
+  app. The contexts in `src/context/` are the single place to swap mock state
+  for real requests; no routing or deploy config needs to change.
+- **Cost:** adding functions and a Vercel-backed database can exceed Hobby
+  limits; keep Phase 2 on the free tier to stay inside the same plan.
+
+> This repository is prepared for Vercel but not deployed from this machine —
+> no Vercel account or token was available here. Follow the steps above, then
+> paste the resulting URL into the project's live-link record.
 
 ## Screenshots and recording
 

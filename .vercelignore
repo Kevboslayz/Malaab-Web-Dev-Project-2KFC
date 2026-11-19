@@ -1,0 +1,16 @@
+# Provided design specification — reference only, NOT part of the application.
+topic-07-pickup-games
+
+# Repository documentation / screenshots are not part of the deployed app.
+docs
+*.md
+
+# Local build output and dependencies (Vercel installs and builds fresh).
+node_modules
+dist
+dist-ssr
+
+# Local test / capture scripts, if present in a working copy.
+e2e-test.mjs
+debug.mjs
+screenshots.mjs
