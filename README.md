@@ -16,6 +16,12 @@
 | Keven Abi Frem | 202402903 | Surfaces 07–08 (playing / auth) |
 | Francois Seif | 202302904 | Surfaces 03–04 (game detail / venue) |
 
+## Live link
+
+**<https://malaab-web-dev-project-2-kfc.vercel.app/>** — deployed on the Vercel
+Hobby (free) plan from the GitHub repository. Every branch in this repository
+serves the same build.
+
 ## What the project is
 
 Malaab is a Phase 1 web app for organising pickup games: a player sees which
@@ -154,6 +160,30 @@ are kept in sync with `main`.
   (Christian Nehman) for the owner variant, or as any other user for the
   member variant. `g1` and `g2` start with queues so promotion can be tried.
 
+## Error and status screens
+
+Every failure has its own screen, keyed by an HTTP-style status code. The
+vocabulary lives in `src/data/status.ts`, the shared presentation in
+`src/components/StatusScreen.tsx`, and the routes in `src/App.tsx`.
+
+| Code | Meaning | When it is shown |
+| --- | --- | --- |
+| 400 | Bad request | A malformed request (reserved for Phase 2 validation) |
+| 401 | Sign in required | An action that needs an account |
+| 403 | Not allowed | A player trying to manage somebody else's game |
+| 404 | Not found | Any unknown URL (`*` route) |
+| 500 | Server error | Unexpected runtime error with no specific status |
+| 503 | Unavailable | Temporarily offline service (Phase 2) |
+
+Open `/error/400`, `/error/401`, `/error/403`, `/error/404`, `/error/500` or
+`/error/503` to inspect each screen directly. Unknown URLs show 404. The
+app-wide `ErrorBoundary` wraps the providers, router and every surface; it maps
+a thrown error's `status`/`statusCode` (or a named error class such as
+`ForbiddenError`) to the matching screen, falling back to 500. The designed
+data-state error cards on Browse, Playing, Game detail and Venue are unchanged.
+Errors that occur before the app loads (at the CDN edge) are served by Vercel's
+own error pages.
+
 ## How to run locally (from clone to running dev server)
 
 You need **Node.js 22 LTS** (Node 20.19+ also works) and npm 10+, plus Git.
@@ -237,10 +267,7 @@ vercel --prod
   they must still load. That confirms the `vercel.json` SPA rewrite works.
 - `/favicon.svg` should return an SVG (it comes from `public/`).
 - Visit a nonsense URL such as `/no-such-page`: the app's styled **404 screen**
-  should appear (not a blank page or Vercel's own 404). Any unexpected runtime
-  error is caught by the app-wide error boundary, which shows a recovery screen
-  with a reload button. The designed data-state error cards on Browse, Playing,
-  Game detail and Venue remain as specified.
+  should appear (not a blank page or Vercel's own 404).
 - Confirm the build log used `npm run build` and produced `dist/`.
 
 ### Ready for Phase 2
@@ -318,6 +345,8 @@ the two mobile shots are at **390px**. Click an image to open it full-size.
 | 08 Sign in | [![Sign in](docs/screenshots/08-signin.png "Sign in")](docs/screenshots/08-signin.png) |
 | 390px — Home | [![Home at 390px](docs/screenshots/mobile-home.png "Home at 390px")](docs/screenshots/mobile-home.png) |
 | 390px — Game detail | [![Game detail at 390px](docs/screenshots/mobile-game.png "Game detail at 390px")](docs/screenshots/mobile-game.png) |
+| Error — 404 | [![404 screen](docs/screenshots/error-404.png "404 screen")](docs/screenshots/error-404.png) |
+| Error — 403 | [![403 screen](docs/screenshots/error-403.png "403 screen")](docs/screenshots/error-403.png) |
 
 A short recording can be added here once the team exports one; the screenshots
 above cover every surface and the responsive layout.
@@ -329,3 +358,8 @@ above cover every surface and the responsive layout.
   including the four data states, the three viewer variants, join/leave/drop
   out, automatic queue promotion, validation, the unsaved-changes guard,
   `?next=` redirects, 390px layout and zero console/page errors.
+- Security pass: `npm audit` clean, no secrets in the tree or git history,
+  XSS payload rendered inert, open-redirect payloads blocked, no external
+  requests.
+- Status screens: all six `/error/:code` pages and the wildcard 404 were
+  opened in a browser and verified to show the correct code and message.

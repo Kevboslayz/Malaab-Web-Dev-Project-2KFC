@@ -1,8 +1,11 @@
 import { Component } from 'react'
 import type { ErrorInfo, ReactNode } from 'react'
+import StatusScreen from './StatusScreen'
+import { statusFromError } from '../data/status'
 
-// Last-resort screen if a render error escapes a surface. Without this, a
-// single bad render would leave the user with a blank page.
+// Last-resort screen for unexpected render errors. It picks the matching
+// status screen (401/403/404/500/503...) from the error, so every failure
+// shows the right code instead of a blank page.
 type Props = { children: ReactNode }
 type State = { error: Error | null }
 
@@ -22,26 +25,7 @@ export default class ErrorBoundary extends Component<Props, State> {
 
   render() {
     if (this.state.error) {
-      return (
-        <main className="mx-auto max-w-6xl px-4 py-10">
-          <div className="rounded-card border border-red-500/40 bg-red-500/10 px-6 py-16 text-center">
-            <h1 className="font-display text-4xl uppercase leading-none text-red-200">
-              Something went wrong
-            </h1>
-            <p className="mx-auto mt-4 max-w-sm text-sm text-red-200/80">
-              The page could not be displayed. Reloading restarts the app with
-              fresh Phase 1 mock data.
-            </p>
-            <button
-              type="button"
-              onClick={() => window.location.assign('/')}
-              className="mt-8 inline-flex items-center justify-center rounded-full bg-brand-400 px-5 py-2.5 text-sm font-semibold text-[#06120C] hover:bg-brand-300"
-            >
-              Reload Malaab
-            </button>
-          </div>
-        </main>
-      )
+      return <StatusScreen code={statusFromError(this.state.error)} />
     }
     return this.props.children
   }

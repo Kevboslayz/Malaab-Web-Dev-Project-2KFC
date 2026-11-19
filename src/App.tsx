@@ -9,7 +9,7 @@ import CreateGame from './pages/CreateGame'
 import Organising from './pages/Organising'
 import GameDetail from './pages/GameDetail'
 import Venue from './pages/Venue'
-import NotFound from './pages/NotFound'
+import StatusPage from './pages/StatusPage'
 import ErrorBoundary from './components/ErrorBoundary'
 
 export default function App() {
@@ -31,7 +31,8 @@ export default function App() {
               <Route path="/my-games" element={<Navigate to="/my-games/playing" replace />} />
               <Route path="/my-games/organising" element={<Organising />} />
               <Route path="/my-games/playing" element={<Playing />} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="/error/:code" element={<StatusPage />} />
+              <Route path="*" element={<StatusPage code={404} />} />
             </Routes>
           </BrowserRouter>
         </GamesProvider>
