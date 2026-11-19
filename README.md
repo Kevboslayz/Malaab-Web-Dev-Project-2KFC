@@ -348,9 +348,6 @@ the two mobile shots are at **390px**. Click an image to open it full-size.
 | Error — 404 | [![404 screen](docs/screenshots/error-404.png "404 screen")](docs/screenshots/error-404.png) |
 | Error — 403 | [![403 screen](docs/screenshots/error-403.png "403 screen")](docs/screenshots/error-403.png) |
 
-A short recording can be added here once the team exports one; the screenshots
-above cover every surface and the responsive layout.
-
 ## Verification performed
 
 - `npm run build` — TypeScript type-check and production build both pass.
