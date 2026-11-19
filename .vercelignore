@@ -5,7 +5,10 @@ topic-07-pickup-games
 docs
 *.md
 
-# Local build output and dependencies (Vercel installs and builds fresh).
+# Local environment variables and build output. Secrets belong in the Vercel
+# dashboard, never in the repository or the upload.
+.env
+.env.*
 node_modules
 dist
 dist-ssr

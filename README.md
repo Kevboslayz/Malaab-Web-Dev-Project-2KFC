@@ -257,6 +257,44 @@ vercel --prod
 > no Vercel account or token was available here. Follow the steps above, then
 > paste the resulting URL into the project's live-link record.
 
+## Security review (pre-deploy)
+
+- **Dependencies:** `npm audit` and `npm audit --omit=dev` both report **0
+  vulnerabilities**. Keep dependencies updated in Phase 2.
+- **Secrets:** no API keys, tokens, private keys or credential files exist in
+  the working tree or anywhere in git history (scanned all commits). Only
+  `.env.example` exists and it contains comments only. `.gitignore` and
+  `.vercelignore` both exclude `.env` / `.env.*` so local environment files
+  cannot be committed or uploaded. Vercel secrets belong in the dashboard.
+- **Client code:** React escapes all rendered values; there is no
+  `dangerouslySetInnerHTML`, `eval`, `new Function`, user-controlled inline
+  style, or external script/font request. No network calls, no `localStorage`
+  or `sessionStorage` in Phase 1.
+- **Open redirect:** `safeNext()` in `src/pages/Auth.tsx` accepts only a plain
+  local path. Protocol-relative URLs (`//host`), backslash tricks (`/\host`)
+  and control characters are rejected, so `?next=` cannot send a user off-site
+  after sign-in.
+- **Browser-verified:** an `<img onerror=...>` payload typed into game notes is
+  rendered as inert text and never executes; both `?next=//host` and
+  `?next=/\host` land on `/` after sign-in; no external network requests were
+  observed on any surface.
+- **Response headers:** `vercel.json` sets `nosniff`, `X-Frame-Options: DENY`,
+  `Referrer-Policy`, `Permissions-Policy` and a Content-Security-Policy that
+  allows self-hosted scripts/styles/fonts (with `data:` only for the embedded
+  fonts). The CSP can suppress Vercel's *preview toolbar* in preview
+  deployments; the production app is unaffected.
+- **CSRF:** there are no cookies and no authenticated server requests in
+  Phase 1, so there is no CSRF surface. Revisit this when Phase 2 adds a
+  session (SameSite cookies / CSRF tokens).
+
+**Accepted Phase 1 risks, by design:** `DEMO_PASSWORD` and the seeded user
+passwords are plain text in the client bundle, so anyone can sign in as a
+seeded user — that is the mock authentication the brief asks for. Seed email
+addresses and phone numbers are invented mock data. **Phase 2 must move
+authentication and the house rule to the server**, store salted password
+hashes, validate at the API boundary, add rate limiting, and delete these
+client-side constants.
+
 ## Screenshots and recording
 
 All screenshots below were captured from the running app in headless Chrome;

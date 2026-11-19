@@ -263,6 +263,7 @@ export default function GameDetail() {
             </span>{' '}
             a player
           </p>
+          {game.notes && <p className="mt-3 max-w-prose text-sm text-muted">{game.notes}</p>}
         </div>
         <Link
           to={`/venues/${venue.id}`}

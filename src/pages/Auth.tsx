@@ -17,9 +17,17 @@ const linkClass =
 
 const looksLikeEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())
 
-// Only follow ?next= if it is a path inside this app.
+// Only follow ?next= if it is a plain path inside this app. Reject protocol-
+// relative URLs ("//host"), backslash tricks ("/\host" is treated as "//host"
+// by browsers) and control characters, all of which could become an open
+// redirect once the string is handed to the router.
 function safeNext(next: string | null) {
-  return next && next.startsWith('/') && !next.startsWith('//') ? next : '/'
+  if (!next) return '/'
+  const value = next.trim()
+  if (!value.startsWith('/') || value.startsWith('//') || /[\\\u0000-\u001f]/.test(value)) {
+    return '/'
+  }
+  return value
 }
 
 export default function Auth({ mode }: { mode: Mode }) {
