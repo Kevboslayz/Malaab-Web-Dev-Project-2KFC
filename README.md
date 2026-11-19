@@ -199,7 +199,7 @@ Everything needed for deployment is already committed:
 
 | File | Purpose |
 | --- | --- |
-| `vercel.json` | Framework preset `vite`, `npm run build`, output `dist`, and a SPA rewrite to `/index.html` so deep links such as `/games/g5` and `/my-games/playing` work after a refresh. The rewrite deliberately excludes `/api/` (reserved for Phase 2) and static asset paths. |
+| `vercel.json` | Framework preset `vite`, `npm run build`, output `dist`, and a SPA rewrite to `/index.html` so deep links such as `/games/g5` and `/my-games/playing` work after a refresh (Vercel serves real files and functions first, so `/assets/*` and Phase 2 `/api/*` are unaffected). |
 | `.vercelignore` | Keeps `topic-07-pickup-games/` (the supplied specification), `docs/`, Markdown files and local scripts out of the upload — **only our work is deployed**. `node_modules` and `dist` are excluded too; Vercel installs and builds fresh. |
 | `package.json` | `build` script is `tsc && vite build`; `engines.node` pins a Vite-8-compatible Node runtime. |
 | `.env.example` | Documents environment variables. **Phase 1 needs none.** |
@@ -236,6 +236,11 @@ vercel --prod
 - Open and then **refresh** a deep link such as `/games/g5` and `/venues/v1` —
   they must still load. That confirms the `vercel.json` SPA rewrite works.
 - `/favicon.svg` should return an SVG (it comes from `public/`).
+- Visit a nonsense URL such as `/no-such-page`: the app's styled **404 screen**
+  should appear (not a blank page or Vercel's own 404). Any unexpected runtime
+  error is caught by the app-wide error boundary, which shows a recovery screen
+  with a reload button. The designed data-state error cards on Browse, Playing,
+  Game detail and Venue remain as specified.
 - Confirm the build log used `npm run build` and produced `dist/`.
 
 ### Ready for Phase 2
