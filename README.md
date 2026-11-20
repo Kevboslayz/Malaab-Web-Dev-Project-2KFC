@@ -22,6 +22,28 @@
 Hobby (free) plan from the GitHub repository. Every branch in this repository
 serves the same build.
 
+## Phase 2 — The Full Stack
+
+Phase 2 adds a REST API and a real database underneath this front end. The
+full team plan is in [`PHASE2-PLAN.md`](./PHASE2-PLAN.md).
+
+- **Back-end repository:** <https://github.com/Kevboslayz/Malaab-Web-Dev-Project-2KFC-API>
+- **API deployment:** pending (Render free web service; link to be added after the checkpoint).
+- **Front-end configuration:** set `VITE_API_URL` in the Vercel dashboard to the
+  deployed API origin. Until it is set, Home and Browse keep using the Phase 1
+  mock context, so the live site never breaks mid-migration.
+
+### Member → files, Phase 2
+
+| Member | Back end (`malaab-api`) | Front end (this repo) |
+| --- | --- | --- |
+| Kevin Assi | `src/app.js`, `src/server.js`, `src/config/`, `src/middleware/`, `src/utils/`, `src/models/Venue.js`, `src/models/Game.js`, `src/routes/venues.js`, `src/routes/games.js`, `src/data/`, `src/scripts/seed.js` | `src/api/public.ts`, `src/hooks/usePublicGames.ts`, `src/components/ApiGameCard.tsx`, `src/components/AsyncState.tsx`, `src/pages/Home.tsx`, `src/pages/Browse.tsx` |
+| Keven Abi Frem | `src/models/User.js`, auth routes/middleware | `src/pages/Auth.tsx`, `src/pages/Playing.tsx`, `src/context/AuthContext.tsx`, authenticated API client |
+| Christian Nehman | `src/routes/games.write.js`, ownership middleware | `src/pages/CreateGame.tsx`, `src/pages/Organising.tsx` |
+| Francois Seif | `src/models/Signup.js`, `src/routes/signups.js`, house rule | `src/pages/GameDetail.tsx`, `src/pages/Venue.tsx` |
+
+Every member commits their own work from their own GitHub account.
+
 ## What the project is
 
 Malaab is a Phase 1 web app for organising pickup games: a player sees which
