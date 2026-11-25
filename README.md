@@ -203,7 +203,8 @@ app-wide `ErrorBoundary` wraps the providers, router and every surface; it maps
 a thrown error's `status`/`statusCode` (or a named error class such as
 `ForbiddenError`) to the matching screen, falling back to 500. The designed
 data-state error cards on Browse, Playing, Game detail and Venue are unchanged.
-Errors that occur before the app loads (at the CDN edge) are served by Vercel's
+The CSP's `connect-src` allows the deployed API origin so the browser can call
+Render. Errors that occur before the app loads (at the CDN edge) are served by Vercel's
 own error pages.
 
 ## How to run locally (from clone to running dev server)
